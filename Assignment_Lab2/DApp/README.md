@@ -10,6 +10,7 @@ Educational test-network exercise based on the specified Merunas Grincalaitis tu
 - React frontend and a reproducible Webpack build are included.
 - A Sepolia deployment and one `0.001` test-ETH bet are verified in `evidence/sepolia-deployment.json`.
 - The repository is publicly available at https://github.com/p8zvvckk5s-jpg/ethereum-course-assignments.
+- The published static DApp is available at the IPFS root CID `bafybeicmwmi6imwpgtf63sbvpoeb7dqa7onrrxtldfmjkpx6orqzv62n5y`; a verified gateway URL is https://bafybeicmwmi6imwpgtf63sbvpoeb7dqa7onrrxtldfmjkpx6orqzv62n5y.ipfs.dweb.link/.
 - The 100-participant public round and genuine oracle callback are **not claimed**; they require 100 distinct participant addresses and coordination with the instructor/TA.
 
 ## Install and run
@@ -65,6 +66,8 @@ ipfs pin ls YOUR_ACTUAL_ROOT_CID
 Use an origin-isolated subdomain gateway, for example `https://YOUR_CID.ipfs.dweb.link/`, with your actual CID. Availability must be checked; no gateway availability is promised. Do not publish `.env`, keys, personal data, `node_modules`, source PDFs or local test accounts. Do not enable public access to the local RPC.
 
 If you control a domain, a DNS TXT record named `_dnslink.yourdomain.example` can have value `dnslink=/ipfs/YOUR_ACTUAL_CID`. Configure an appropriate HTTPS DNSLink gateway according to its current instructions. Domain ownership and gateway setup are separate requirements. The supplement's `docs.ipfs.io.ipns.localhost:8080` is a documentation address, not your DApp URL. Do not buy a domain without confirming whether the instructor requires a live custom-domain demonstration.
+
+The CID above was loaded in a separate browser session and the Sepolia configuration was checked. The `*.ipfs.dweb.link` gateway may redirect to an inbrowser.link origin while loading; this is normal gateway behavior. A custom domain was not configured.
 
 ## GitHub submission
 
