@@ -7,6 +7,7 @@
   "scripts": {
     "compile": "node scripts/compile.mjs",
     "test": "node scripts/test.mjs",
+    "test:ui-connect": "node scripts/repro-ui-connect.mjs",
     "build": "npm run compile && webpack --config webpack.config.cjs",
     "start": "node scripts/serve.mjs",
     "demo": "node scripts/demo.mjs"

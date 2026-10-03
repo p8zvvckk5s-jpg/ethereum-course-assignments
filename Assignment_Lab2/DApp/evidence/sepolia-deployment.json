@@ -8,7 +8,7 @@
     "status": "confirmed"
   },
   "deployment": {
-    "contractAddress": "0xCBa5EDaaF9d6407A85531091C3762aE6BFcf30c3",
+  "contractAddress": "0xCBa5edaAf9d6407A85531091C3762Ae6bfCF30c3",
     "transactionHash": "0xeee0ecc55a8dd03507e96afe978fcf0f50c8be8f7b1a3a32f7871e67b1b0b000",
     "status": "confirmed",
     "constructor": {

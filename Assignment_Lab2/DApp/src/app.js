@@ -1,20 +1,20 @@
 import React,{useState,useEffect} from 'react';
 import {createRoot} from 'react-dom/client';
-import {BrowserProvider,JsonRpcProvider,Contract,ContractFactory,parseEther,formatEther,isAddress} from 'ethers';
+import {BrowserProvider,JsonRpcProvider,Contract,ContractFactory,parseEther,formatEther,getAddress} from 'ethers';
 import artifact from '../artifacts/Casino.json';
 const h=React.createElement;
 function App(){
  const [config,setConfig]=useState(null),[address,setAddress]=useState(''),[wallet,setWallet]=useState(null),[signer,setSigner]=useState(null),[contract,setContract]=useState(null);
  const [choice,setChoice]=useState(1),[amount,setAmount]=useState('0.001'),[claimRound,setClaimRound]=useState('1'),[reserve,setReserve]=useState('0.01');
  const [stats,setStats]=useState(null),[status,setStatus]=useState('Connect a wallet on Sepolia, or open the local demonstration.'),[busy,setBusy]=useState(false);
- useEffect(()=>{fetch('./config.json').then(r=>r.json()).then(c=>{setConfig(c);setAddress(c.address||'');}).catch(e=>setStatus(e.message));},[]);
+ useEffect(()=>{fetch('./config.json').then(r=>r.json()).then(c=>{setConfig(c);setAddress(c.address?getAddress(c.address.toLowerCase()):'');}).catch(e=>setStatus(e.message));},[]);
  useEffect(()=>{const p=window.ethereum;if(!p)return;const reset=()=>{setSigner(null);setWallet(null);setContract(null);setStats(null);setStatus('Wallet changed. Please reconnect.');};p.on('accountsChanged',reset);p.on('chainChanged',reset);return()=>{p.removeListener('accountsChanged',reset);p.removeListener('chainChanged',reset);};},[]);
  async function action(fn){setBusy(true);try{await fn();}catch(e){setStatus(e.shortMessage||e.reason||e.message);}finally{setBusy(false);}}
  async function refresh(c){const [round,min,max,count,pot]=await Promise.all([c.roundId(),c.minimumBet(),c.maxAmountOfBets(),c.numberOfBets(),c.totalBet()]);const r=await c.rounds(round);setStats({round:String(round),min:formatEther(min),max:Number(max),count:Number(count),pot:formatEther(pot),requested:r.requested});}
  async function connect(local=false){let s;
   if(local){if(config?.mode!=='local-mock'||!['127.0.0.1','localhost'].includes(location.hostname))throw Error('Local test connection is only enabled on localhost.');const p=new JsonRpcProvider('http://127.0.0.1:8547');if((await p.getNetwork()).chainId!==31337n)throw Error('Not the local test chain');s=await p.getSigner(99);}
   else{if(!window.ethereum)throw Error('No wallet provider found. Install MetaMask and select Sepolia.');await window.ethereum.request({method:'eth_requestAccounts'});const p=new BrowserProvider(window.ethereum);const n=await p.getNetwork();if(n.chainId!==11155111n)throw Error('Select Ethereum Sepolia. Mainnet transactions are blocked.');s=await p.getSigner();}
-  setSigner(s);setWallet(await s.getAddress());if(isAddress(address)){const c=new Contract(address,artifact.abi,s);if(await s.provider.getCode(address)==='0x')throw Error('No contract exists at this address on the selected network');setContract(c);await refresh(c);}setStatus(local?'Connected to isolated local mock chain. No real funds.':'Connected to Sepolia. Confirm every transaction in your wallet.');
+  setSigner(s);setWallet(await s.getAddress());const normalized=getAddress(address.toLowerCase());setAddress(normalized);const c=new Contract(normalized,artifact.abi,s);if(await s.provider.getCode(normalized)==='0x')throw Error('No contract exists at this address on the selected network');setContract(c);await refresh(c);setStatus(local?'Connected to isolated local mock chain. No real funds.':'Connected to Sepolia. Confirm every transaction in your wallet.');
  }
  async function transact(method,args=[],opts={}){if(!contract)throw Error('Load a deployed contract first');setStatus('Waiting for transaction confirmation...');const t=await contract[method](...args,opts);const r=await t.wait();await refresh(contract);setStatus('Confirmed transaction: '+r.hash+'\nNetwork: '+(config.mode==='local-mock'?'LOCAL MOCK':'Sepolia'));}
  async function deploy(){if(!signer||config.mode==='local-mock')throw Error('Connect a Sepolia wallet first');if((await signer.provider.getNetwork()).chainId!==11155111n)throw Error('Sepolia only');setStatus('Review the deployment and optional oracle funding in your wallet.');const c=await new ContractFactory(artifact.abi,artifact.bytecode,signer).deploy(parseEther(amount),100,{value:parseEther(reserve)});await c.waitForDeployment();setAddress(await c.getAddress());setContract(c);await refresh(c);setStatus('Sepolia contract: '+await c.getAddress()+'\nDeployment transaction: '+c.deploymentTransaction().hash+'\nRecord this address in public/config.json before publishing. Oracle callback still needs live validation.');}

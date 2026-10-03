@@ -8,7 +8,9 @@ Educational test-network exercise based on the specified Merunas Grincalaitis tu
 - Live Oraclize-library and local mock bytecode compile with Solidity 0.4.24.
 - Local automated results are in `evidence/local-tests.json`. They test contract logic, not the external oracle or its proof.
 - React frontend and a reproducible Webpack build are included.
-- Sepolia deployment, a genuine oracle callback, GitHub publication and IPFS publication are **not claimed**. Record their actual evidence before submitting as a fully deployed lab.
+- A Sepolia deployment and one `0.001` test-ETH bet are verified in `evidence/sepolia-deployment.json`.
+- The repository is publicly available at https://github.com/p8zvvckk5s-jpg/ethereum-course-assignments.
+- The 100-participant public round and genuine oracle callback are **not claimed**; they require 100 distinct participant addresses and coordination with the instructor/TA.
 
 ## Install and run
 
@@ -32,6 +34,12 @@ npm start
 The static configuration in `public/config.json` is Sepolia by default. The local demonstration overrides it only in memory; it never writes a mock contract address into the publishable configuration.
 
 ## Actual Sepolia deployment
+
+Verified contract: `0xCBa5edaAf9d6407A85531091C3762Ae6bfCF30c3`
+
+Deployment transaction: `0xeee0ecc55a8dd03507e96afe978fcf0f50c8be8f7b1a3a32f7871e67b1b0b000`
+
+Verified bet transaction: `0xddbdda9cdbb081ced423dd02e8014acf18e541eafdedb528900ba9fcd4c7dc42`
 
 1. Use a separate test wallet and select Ethereum Sepolia, chain ID 11155111. Obtain test ETH from an appropriate faucet or ask the instructor/TA. Do not buy mainnet ETH merely to meet a faucet condition. Never share a seed phrase or private key.
 2. Run the static interface with `npm start`, connect your Sepolia wallet, and review the deployment inputs. The minimum bet defaults to 0.001 test ETH and the round size is fixed to 100 by the form. The displayed oracle reserve is configurable and is not a guarantee of the live oracle's price.
@@ -60,7 +68,7 @@ If you control a domain, a DNS TXT record named `_dnslink.yourdomain.example` ca
 
 ## GitHub submission
 
-Use the **same course repository** as previous labs. Copy this project into a clearly named `assignment-2` folder in that repository. Preserve `package-lock.json`, source, tests, licenses and evidence. Do not copy `node_modules` or local chain data. The `.gitignore` excludes them. Commit and push before the deadline; give the repository link in the report/LMS. Invite the instructor and TA using their exact GitHub accounts. No repository was created, pushed or modified automatically.
+The public course repository is https://github.com/p8zvvckk5s-jpg/ethereum-course-assignments. Preserve `package-lock.json`, source, tests, licenses and evidence. Do not copy `node_modules` or local chain data. The `.gitignore` excludes them. The TA confirmed that public visibility plus the repository link is sufficient.
 
 ## Changes relative to the original
 
