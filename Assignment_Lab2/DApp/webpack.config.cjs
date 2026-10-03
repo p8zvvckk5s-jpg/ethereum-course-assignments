@@ -1,0 +1,2 @@
+const path=require('path'); const fs=require('fs');
+module.exports={mode:'production',entry:'./src/app.js',output:{path:path.resolve(__dirname,'dist'),filename:'app.js',publicPath:'./',clean:true},performance:{hints:false},plugins:[{apply(compiler){compiler.hooks.afterEmit.tap('StaticFiles',()=>{for(const f of fs.readdirSync('public'))fs.copyFileSync(path.join('public',f),path.join('dist',f));});}}]};
