@@ -1,0 +1,31 @@
+{
+  "network": "Ethereum Sepolia",
+  "chainId": 11155111,
+  "wallet": "0x73669ECDD8b599F71bc4055b415c08A470d1451F",
+  "faucet": {
+    "amountEth": "0.012",
+    "transactionHash": "0x60196aec712321da55147b8b3d8a5894b0c4eda3ece56196e17914396268af24",
+    "status": "confirmed"
+  },
+  "deployment": {
+    "contractAddress": "0xCBa5EDaaF9d6407A85531091C3762aE6BFcf30c3",
+    "transactionHash": "0xeee0ecc55a8dd03507e96afe978fcf0f50c8be8f7b1a3a32f7871e67b1b0b000",
+    "status": "confirmed",
+    "constructor": {
+      "minimumBetWei": "1000000000000000",
+      "maxAmountOfBets": 100,
+      "oracleReserveWei": "0"
+    }
+  },
+  "interaction": {
+    "action": "bet(1)",
+    "amountWei": "1000000000000000",
+    "transactionHash": "0xddbdda9cdbb081ced423dd02e8014acf18e541eafdedb528900ba9fcd4c7dc42",
+    "status": "confirmed",
+    "event": "BetPlaced(round=1, player=wallet, number=1, amount=1000000000000000)"
+  },
+  "oracle": {
+    "status": "not publicly exercised",
+    "reason": "The assignment round size is 100 and the contract permits one bet per address per round. One genuine public bet was recorded; no oracle request or callback is claimed."
+  }
+}
