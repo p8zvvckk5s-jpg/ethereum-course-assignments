@@ -1,0 +1,13 @@
+{
+  "compiler": "0.4.24+commit.e67f0147.Emscripten.clang",
+  "optimizer": {
+    "enabled": true,
+    "runs": 200
+  },
+  "initialVictimDepositWei": "5000000000000000000",
+  "attackerDepositWei": "1000000000000000000",
+  "targetBalanceAfterAttackWei": "0",
+  "attackerContractBalanceAfterAttackWei": "6000000000000000000",
+  "attackTransactionGasUsed": "131273",
+  "scope": "Local Ganache chain only"
+}

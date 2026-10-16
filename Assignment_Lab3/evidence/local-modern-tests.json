@@ -1,0 +1,20 @@
+{
+  "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+  "optimizer": {
+    "enabled": true,
+    "runs": 200
+  },
+  "helloWorld": {
+    "returned": "Hello, world!",
+    "transactionGasUsed": "23717"
+  },
+  "storage1KiB": {
+    "inputWords": 32,
+    "inputBytes": 1024,
+    "transactionGasUsed": "757989",
+    "note": "Local Ganache measurement; network and compiler conditions are recorded separately in the report."
+  },
+  "safeVault": {
+    "remainingDepositWei": "600000000000000000"
+  }
+}
